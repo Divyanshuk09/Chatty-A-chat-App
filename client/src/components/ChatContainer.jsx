@@ -4,7 +4,7 @@ import userPfp from "../assets/user_pfp.jpg";
 
 import { BsEmojiSmile } from "react-icons/bs";
 import { IoMdImages, IoMdInformationCircleOutline } from "react-icons/io";
-import { IoSend } from "react-icons/io5";
+import { IoClose, IoSend } from "react-icons/io5";
 import { HiMicrophone } from "react-icons/hi";
 
 import { messagesDummyData } from "../assets/assets";
@@ -37,12 +37,13 @@ const ChatContainer = ({ selectedUser, setSelectedUser }) => {
           <span className="w-2 h-2 rounded-full bg-green-500" />
           {selectedUser?.fullName || "User"}
         </p>
-        <img
+        <div
           onClick={() => setSelectedUser(null)}
-          src="/path-to-close-icon.svg"
+          src=""
           alt="Close"
-          className="md:hidden w-6 cursor-pointer"
-        />
+          className="md:hidden w-6 cursor-pointer">
+            <IoClose/>
+        </div>
         <div className="hidden md:block cursor-pointer">
           <IoMdInformationCircleOutline size={25} />
         </div>

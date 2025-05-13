@@ -5,7 +5,7 @@ import logo from "../assets/Logo.png";
 import logoimage from "../assets/Logoname.png";
 const LoginPage = () => {
     const [state, setState] = useState("Login");
-    const [fullName, setFullName] = useState("");
+    const [fullName, setfullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -13,7 +13,7 @@ const LoginPage = () => {
 
     const toggleState = () => {
         setState(state === "Login" ? "Sign Up" : "Login");
-        setFullName("");
+        setfullName("");
         setEmail("");
         setPassword("");
     };
@@ -45,7 +45,7 @@ const LoginPage = () => {
                 type="text"
                 placeholder="Full Name"
                 value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                onChange={(e) => setfullName(e.target.value)}
                 className="w-full pl-10 pr-3 py-2 bg-white/10 border border-gray-500 rounded-md focus:outline-none"
                 required
                 />

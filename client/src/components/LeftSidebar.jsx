@@ -14,8 +14,7 @@ const LeftSidebar = ({ selectedUser, setSelectedUser }) => {
   const toggleMenu = () => setShowMenu((prev) => !prev);
 
   return (
-    <div
-      className={`bg-[#8185B2]/10 h-full p-4 rounded-r-xl overflow-y-auto text-white backdrop-blur-md shadow-xl ${
+    <div className={`bg-[#8185B2]/10 h-full p-4 rounded-r-xl overflow-y-auto text-white backdrop-blur-md shadow-xl ${
         selectedUser ? "max-md:hidden" : ""
       }`}
     >
