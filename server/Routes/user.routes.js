@@ -9,6 +9,6 @@ router.post('/register',registerUser)
 router.post('/login',loginUser)
 router.post('/logout',protectRoute,logoutUser)
 router.get('/refresh-token',refreshToken)
-router.post('/update-profile',upload.single('profilePic') ,protectRoute,updateProfile)
+router.put('/update-profile',upload.single('profilePic') ,protectRoute,updateProfile)
 
 export default router;

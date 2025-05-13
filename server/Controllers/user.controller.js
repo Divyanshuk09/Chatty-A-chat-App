@@ -5,7 +5,7 @@ import { v2 as cloudinary } from 'cloudinary'
 
 //Generate access and refresh token 
 const createAccessToken = (userId) => {
-    return jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" })
+    return jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1d" })
 }
 const createRefreshToken = (userId) => {
     return jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
