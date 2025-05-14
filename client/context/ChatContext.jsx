@@ -21,7 +21,7 @@ export const ChatProvider = ({children})=>{
 
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             const { data } = await axios.get('/api/message/users');
-            console.log("user:", data);
+            // console.log("user:", data);
 
             if (data.success) {
             setUsers(data.users);
@@ -37,7 +37,7 @@ export const ChatProvider = ({children})=>{
     const getMessages = async (userId) => {
         try {
           const {data} = await axios.get(`/api/message/${userId}`)
-          console.log("data:",data);
+        //   console.log("data:",data);
           if (data.success) {
             setMessages(data.messages)
           }
@@ -50,7 +50,7 @@ export const ChatProvider = ({children})=>{
     const sendMessage =async (messageData) => {
         try {
             const {data} = await axios.post(`/api/message/send/${selectedUser._id}`,messageData)
-            console.log("messages:",data);
+            // console.log("messages:",data);
             if (data.success) {
                 setMessages((prevMessages)=>[...prevMessages,data.newMessage])
             }else{

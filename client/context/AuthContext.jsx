@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     //   console.log("data:", data);
       if (data.success) {
         setAuthUser(data.user);
-        console.log("AuthUser",data.user);
+        // console.log("AuthUser",data.user);
         connectSocket(data.user);
       }
     } catch (error) {

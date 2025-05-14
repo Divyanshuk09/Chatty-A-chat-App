@@ -23,7 +23,7 @@ const ProfilePage = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log({ name, bio, image });
+    // console.log({ name, bio, image });
 
     const formData = new FormData();
     formData.append('fullName',name);
