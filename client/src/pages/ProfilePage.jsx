@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import userpfp from "../assets/user_pfp.jpg";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 const ProfilePage = () => {
-  const [name, setName] = useState("Divyanshu");
-  const [bio, setBio] = useState("I am using chatty");
+  const {authUser, updateprofile} = useContext(AuthContext)
+  // console.log("AUTHUSER:",authUser);
+
+  const [name, setName] = useState(authUser.fullName);
+  const [bio, setBio] = useState(authUser.bio);
   const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(authUser.profilePic);
+
 
   const navigate = useNavigate()
   const handleImageChange = (e) => {
@@ -16,9 +21,17 @@ const ProfilePage = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log({ name, bio, image }); // You can later hook this up with backend
+    console.log({ name, bio, image });
+
+    const formData = new FormData();
+    formData.append('fullName',name);
+    formData.append('bio',bio);
+    if (image instanceof File) {
+      formData.append("profilePic",image);
+    }
+    await updateprofile(formData);
     navigate('/')
   };
 

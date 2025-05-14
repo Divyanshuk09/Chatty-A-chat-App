@@ -120,7 +120,7 @@ export const loginUser = async (req, res) => {
 }
 
 export const checkAuth = async (req, res) => {
-    res.json({
+    res.status(201).json({
         success: true,
         user: req.user
     })

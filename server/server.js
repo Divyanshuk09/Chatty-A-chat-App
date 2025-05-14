@@ -1,5 +1,7 @@
-import express from 'express';
 import dotenv from 'dotenv';
+dotenv.config(); // ✅ Load environment variables at the top
+
+import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import http from 'http';
@@ -8,8 +10,9 @@ import { Server } from 'socket.io'
 import { connectDB } from './DB/index.js';
 import connectCloudinary from './Utils/cloudinary.js';
 
-// Load environment variables
-dotenv.config();
+// Connect to MongoDB
+await connectDB();
+await connectCloudinary();
 
 const app = express();
 // Step 1: Create HTTP server to support Socket.IO
@@ -37,6 +40,7 @@ io.on('connection', (socket) => {
 
   // Step 7: Emit updated list of online users to all clients
   io.emit('getOnlineUsers', Object.keys(userSocketMap))
+
   // Step 8: Handle socket disconnection
   socket.on('disconnect', () => {
     console.log("User is Disconnected", userId);
@@ -47,24 +51,20 @@ io.on('connection', (socket) => {
   })
 })
 
-// Connect to MongoDB
-await connectDB();
-await connectCloudinary();
-
 // Middleware
 app.use(cors());
-app.use(express.json({ limit: '4mb' }));
+app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser())
+
 // Test Route
 app.get('/', (req, res) => {
   res.send('✅ API is working');
 });
 
-
 import userRouter from './Routes/user.routes.js'
 import messageRouter from './Routes/message.routes.js'
 
-//Routes
+// Routes
 app.use('/api/user', userRouter)
 app.use('/api/message', messageRouter)
 

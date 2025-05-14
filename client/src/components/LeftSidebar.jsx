@@ -1,17 +1,31 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import logo from "../assets/Logo.png";
 import userPfp from "../assets/user_pfp.jpg";
-import { userDummyData } from "../assets/assets";
+// import { userDummyData } from "../assets/assets";
+import { AuthContext } from "../../context/AuthContext";
+import { ChatContext } from "../../context/ChatContext";
 
-const LeftSidebar = ({ selectedUser, setSelectedUser }) => {
+const LeftSidebar = () => {
+
+  const {getUsers, users, selectedUser, setSelectedUser ,
+    unseenMessages,setunseenMessages
+  }=useContext(ChatContext)
+
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [searchText, setSearchText] = useState("");
 
+  const {logout ,onlineUser} = useContext(AuthContext);
   const toggleMenu = () => setShowMenu((prev) => !prev);
+
+  const filterUser = searchText? users.filter((user)=>user.fullName.toLowerCase().includes(searchText.toLowerCase())) : users
+
+  useEffect(() => {
+    getUsers()
+  }, [onlineUser]);
 
   return (
     <div className={`bg-[#8185B2]/10 h-full p-4 rounded-r-xl overflow-y-auto text-white backdrop-blur-md shadow-xl ${
@@ -38,9 +52,7 @@ const LeftSidebar = ({ selectedUser, setSelectedUser }) => {
                   Edit Profile
                 </p>
                 <hr className="my-2 border-white/10" />
-                <p onClick={() => { setShowMenu(false)
-                    // Add logout logic here if needed
-                  }}
+                <p onClick={() => { setShowMenu(false);logout();}}
                   className="cursor-pointer hover:text-red-400 transition">
                   Log Out
                 </p>
@@ -70,10 +82,13 @@ const LeftSidebar = ({ selectedUser, setSelectedUser }) => {
 
       {/* ---------- Users List ---------- */}
       <div className="flex flex-col mt-4">
-        {userDummyData.map((user, index) => (
+        {filterUser.map((user, index) => (
           <div
             key={index}
-            onClick={() => setSelectedUser(user)}
+            onClick={() =>{ setSelectedUser(user);
+              setunseenMessages(prev=>(
+                {...prev,[user.id]:0}
+              ))}}
             className={`relative flex items-center gap-2 p-2 pl-4 rounded cursor-pointer transition-all hover:bg-white/5 max-sm:text-sm ${
               selectedUser?._id === user._id ? "bg-[#282142]/50" : ""
             }`}>
@@ -86,15 +101,15 @@ const LeftSidebar = ({ selectedUser, setSelectedUser }) => {
 
               <span
                 className={`text-sm ${
-                  index < 3 ? "text-green-400" : "text-neutral-500"
+                  onlineUser.includes(user._id) ? "text-green-400" : "text-neutral-500"
                 }`}>
-                {index < 3 ? "Online" : "Offline"}
+                { onlineUser.includes(user._id) ? "Online" : "Offline"}
               </span>
             </div>
 
-            {index > 2 && (
+            {unseenMessages[user._id] > 0  && (
               <p className="absolute top-4 right-4 text-xs h-5 w-5 flex items-center justify-center rounded-full bg-violet-500/50">
-                {index}
+               { unseenMessages[user._id]}
               </p>
             )}
           </div>

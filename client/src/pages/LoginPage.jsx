@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaArrowRight, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { TbEyeClosed, TbLockPassword, TbEye } from "react-icons/tb";
 import logo from "../assets/Logo.png";
 import logoimage from "../assets/Logoname.png";
+import { AuthContext } from "../../context/AuthContext";
 const LoginPage = () => {
     const [state, setState] = useState("Login");
     const [fullName, setfullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const [showPassword, setShowPassword] = useState(false);
+
+    const {login} = useContext(AuthContext)
 
     const toggleState = () => {
         setState(state === "Login" ? "Sign Up" : "Login");
@@ -18,9 +20,11 @@ const LoginPage = () => {
         setPassword("");
     };
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log({ fullName, email, password });
+        login(state==="Sign Up"?'register':"login",{fullName,email,password})
     };
 
     return (
