@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
-import logo from "../assets/Logo.png";
+import logo from "/Logo.png";
 import userPfp from "../assets/user_pfp.jpg";
 // import { userDummyData } from "../assets/assets";
 import { AuthContext } from "../../context/AuthContext";
