@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { FaArrowRight, FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import { TbEyeClosed, TbLockPassword, TbEye } from "react-icons/tb";
-import logo from "/Logo.png";
-import logoimage from "/Logoname.png";
+import logo from "../assets/Logo.png";
+import logoimage from "../assets/Logoname.png";
 import { AuthContext } from "../../context/AuthContext";
 const LoginPage = () => {
     const [state, setState] = useState("Login");
