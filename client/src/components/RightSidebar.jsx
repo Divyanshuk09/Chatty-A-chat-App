@@ -37,14 +37,14 @@ const RightSidebar = () => {
   if (!selectedUser) return null;
 
   return (
-    <div className="bg-[#1e1f3b] text-white w-full h-full relative max-md:hidden overflow-y-auto">
+    <div className="bg-[#1e1f3b] text-white w-full h-full relative max-md:hidden overflow-hidden">
       {/* Profile Section */}
-      <div className="pt-8 pb-4 flex flex-col items-center gap-3 text-sm px-6 border-b border-white/10">
+      <div className="py-4 flex flex-col items-center gap-3 text-sm px-6 border-b border-white/10">
         <div className="relative group">
           <img
             src={selectedUser?.profilePic || userPfp}
             alt="Profile"
-            className="w-24 h-24 rounded-full object-cover border-2 border-purple-500/50 shadow-lg group-hover:border-purple-400 transition-all"
+            className="w-15 h-15 rounded-full object-cover border-2 border-purple-500/50 shadow-lg group-hover:border-purple-400 transition-all"
           />
           <div className={`absolute bottom-1 right-1 w-4 h-4 rounded-full border-2 border-[#1e1f3b] ${
             onlineUser.includes(selectedUser._id) ? 'bg-green-500' : 'bg-gray-500'
@@ -52,21 +52,21 @@ const RightSidebar = () => {
         </div>
         
         <div className="text-center">
-          <h1 className="text-xl font-semibold text-white">{selectedUser.fullName}</h1>
-          <p className="text-sm text-purple-200 mt-1">{selectedUser.bio || "Hey there! I'm using ChatApp"}</p>
+          <h1 className="text-lg font-semibold text-white">{selectedUser.fullName}</h1>
+          <p className="text-xs text-purple-200 mt-1">{selectedUser.bio || "Hey there! I'm using ChatApp"}</p>
         </div>
       </div>
 
       {/* Files Section */}
-      <div className="px-5 py-4 ">
-        <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-purple-300">
+      <div className="px-5 py-2">
+        <h2 className="text-md font-semibold mb-4 flex items-center gap-2 text-purple-300">
           <FaPhotoVideo className="text-purple-400" /> Media
         </h2>
 
         {/* Photo Thumbnails */}
         {imageMessages.length > 0 ? (
-          <div className="mb-8">
-            <div className="grid grid-cols-3 grid-rows-2 gap-3">
+          <div className="mb-2">
+            <div className="grid grid-cols-3 gap-3 max-h-40 overflow-y-scroll scrollbar-hide">
               {imageMessages.map((msg, index) => (
                 <div
                   key={msg._id}
@@ -76,49 +76,49 @@ const RightSidebar = () => {
                   <img 
                     src={msg.image} 
                     alt="media" 
-                    className="w-full h-24 object-cover hover:opacity-90 transition-opacity"
+                    className="w-full h-20 object-cover hover:opacity-90 transition-opacity"
                   />
                 </div>
               ))}
             </div>
           </div>
         ) : (
-          <div className="text-center py-8 text-gray-400">
+          <div className="text-center py-4 text-gray-400">
             No media shared yet
           </div>
         )}
 
         {/* File Types */}
-        <div className="space-y-4 mt-6">
-          <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
             <span className="flex items-center gap-3">
               <FaPhotoVideo className="text-purple-400" /> Photos
             </span>
             <span className="text-purple-300">{imageMessages.length}</span>
           </div>
           
-          <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+          <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
             <span className="flex items-center gap-3">
               <FaFileAlt className="text-blue-400" /> Files
             </span>
             <span className="text-blue-300">0</span>
           </div>
           
-          <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+          <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
             <span className="flex items-center gap-3">
               <FaMusic className="text-pink-400" /> Audio
             </span>
             <span className="text-pink-300">0</span>
           </div>
           
-          <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+          <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
             <span className="flex items-center gap-3">
               <FaLink className="text-green-400" /> Links
             </span>
             <span className="text-green-300">0</span>
           </div>
           
-          <div className="flex items-center justify-between p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
+          <div className="flex items-center justify-between p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-colors">
             <span className="flex items-center gap-3">
               <FaMicrophone className="text-yellow-400" /> Voice
             </span>
